@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Order placement data for Barker Bob's Burger Bar's Bigger, Better Burger Bonanza
+-->
+
+<!-- An order identifies the customer, order type, bugers, and anything special  -->
+<!ELEMENT order (customer, delivery?, burger+, special?)>
+
+<!-- A customer is identified simply by their name  -->
+<!ELEMENT customer (#PCDATA)>
+
+<!-- An order is eat in, takeout, or delivery -->
+<!ATTLIST order
+    type (eatin|takeout|delivery) #REQUIRED
+>
+
+<!-- A delivery contains instructions -->
+<!ELEMENT delivery (#PCDATA)>
+
+<!-- Special instructions are text -->
+<!ELEMENT special (#PCDATA)>
+
+<!-- Each burger is specified individually 
+    1 of 5 patty types
+    up to 2 cheeses
+    any number of toppings
+    any number of sauces
+    special instructions
+    optional name -->
+<!ELEMENT burger (patty, cheeses?, topping*, sauce*, instructions?, name?)>
+
+<!-- A patty has one of 5 types -->
+<!ELEMENT patty (#PCDATA)>
+<!ATTLIST patty
+    type (beef|pork|turkey|bison|vege) "beef"
+>
+
+<!-- The customer can have two cheeses, top and bottom -->
+<!ELEMENT cheeses EMPTY>
+<!ATTLIST cheeses
+    top (american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+    bottom (american|swiss|jack|blue|gruyere|gouda|aged|goat|brie) #IMPLIED
+>
+
+<!-- There are a variety of toppings available -->
+<!ELEMENT topping EMPTY>
+<!ATTLIST topping
+    type (lettuce|tomato|raw|dill|roasted|shrooms|salsa|bacon|chilies|fkchili|avocado|egg|porkbelly) #REQUIRED
+>
+
+<!-- There are slightly fewer sauces -->
+<!ELEMENT sauce EMPTY>
+<!ATTLIST sauce
+    type (ketchup|mustard|mayo|fksauce|peanutbutter) #REQUIRED
+>
+
+<!-- Instructions are just text -->
+<!ELEMENT instructions (#PCDATA)>
+
+<!-- The customer can enter their own name for the burger -->
+<!ELEMENT name (#PCDATA)>
